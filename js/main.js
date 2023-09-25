@@ -99,19 +99,21 @@ posts.forEach((post)=> {
 })
 
 //3. bottone like
-const btnLike = document.querySelector('.like-button')
+const btnLikes = document.querySelectorAll('.like-button');
 
-console.log(btnLike);
-btnLike.addEventListener('click', liked())
-let counter= 0;
-
-function liked (){
-    btnLike.classList.add('like-button--liked');
-    counter++;
-    console.log(counter);
-
-    if (counter == 2){
-        btnLike.classList.remove('like-button--liked');
-        counter = 0;
+btnLikes.forEach((like)=>{
+    this.addEventListener('click', liked())
+    let counter= 0;
+    
+    
+    function liked (){
+        like.classList.add('like-button--liked');
+        counter++;
+        console.log(counter);
+    
+        if (counter == 2){
+            like.classList.remove('like-button--liked');
+            counter = 0;
+        }
     }
-}
+})
