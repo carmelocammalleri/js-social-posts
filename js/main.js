@@ -101,7 +101,9 @@ posts.forEach((post)=> {
 
 //3. bottone like
 const btnLikes = document.querySelectorAll('.like-button');
+const likesAd = document.getElementById('like-counter-1');
 
+console.log(likesAd);
 btnLikes.forEach((like)=>{
     like.addEventListener('click', liked)
     let counter= 0;
@@ -115,7 +117,6 @@ btnLikes.forEach((like)=>{
             like.classList.remove('like-button--liked');
             counter = 0;
         }
-        posts.push('counter')
     }
 })
 
