@@ -10,7 +10,7 @@ const posts = [
         "likes": 80,
         "created": "2021-06-25"
     },
-    {
+   /* {
         "id": 2,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=112",
@@ -53,5 +53,5 @@ const posts = [
         },
         "likes": 95,
         "created": "2021-03-05"
-    }
+    }*/
 ];
