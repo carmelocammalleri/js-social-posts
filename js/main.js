@@ -101,6 +101,19 @@ posts.forEach((post)=> {
 const btnLike = document.querySelector('.like-button')
 btnLike.addEventListener('click', liked)
 
+let counter= 0;
+
 function liked (){
-    btnLike.classList.toggle('like-button--liked');
+    btnLike.classList.add('like-button--liked');
+    counter++;
+    console.log(counter);
+
+    if (counter == 2){
+        btnLike.classList.remove('like-button--liked');
+        counter = 0;
+    }
 }
+
+const numeri = posts.map((numero)=>{
+    return numero + counter
+})
