@@ -11,7 +11,7 @@ const posts = [
         "likes": 1000,
         "created": "2021-06-25"
     },
-   /* {
+    {
         "id": 2,
         "content": "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "media": "https://unsplash.it/600/400?image=112",
@@ -54,7 +54,7 @@ const posts = [
         },
         "likes": 95,
         "created": "2021-03-05"
-    }*/
+    }
 ];
 
 //2. collegare dall'html i vari punti
@@ -95,12 +95,14 @@ posts.forEach((post)=> {
             </div>            
         </div>
     `
+    
 })
 
 //3. bottone like
 const btnLike = document.querySelector('.like-button')
-btnLike.addEventListener('click', liked)
 
+console.log(btnLike);
+btnLike.addEventListener('click', liked())
 let counter= 0;
 
 function liked (){
@@ -113,7 +115,3 @@ function liked (){
         counter = 0;
     }
 }
-
-const numeri = posts.map((numero)=>{
-    return numero + counter
-})
