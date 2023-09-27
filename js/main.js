@@ -61,9 +61,11 @@ const posts = [
 const container = document.getElementById('container');
 
 //3. stampare sull'html gli elementi
-posts.forEach((post)=> {
-    container.innerHTML += 
-    `
+posts.forEach((post)=> container.innerHTML += getElContainer(post))
+
+function getElContainer(post){
+    const {id, content, media, author, likes, created} = post;
+    return `
         <div class="post">
             <div class="post__header">
                 <div class="post-meta">                    
@@ -95,22 +97,22 @@ posts.forEach((post)=> {
             </div>            
         </div>
     `
-    console.log(post.likes);
-
-})
+    
+}
 
 //3. bottone like
 const btnLikes = document.querySelectorAll('.like-button');
-const likesAd = document.getElementById('like-counter-1');
+const likesAdd = document.getElementById('like-counter-1');
 
-console.log(likesAd);
+
 btnLikes.forEach((like)=>{
     like.addEventListener('click', liked)
     let counter= 0;
-    
+
     function liked (){
         like.classList.add('like-button--liked');
         counter++;
+        
         console.log(counter);
         
         if (counter == 2){
