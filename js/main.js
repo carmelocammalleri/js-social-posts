@@ -62,7 +62,7 @@ const container = document.getElementById('container');
 let userLikes=  [];
 
 //3. stampare sull'html gli elementi
-posts.forEach((post)=> container.innerHTML += getElContainer(post))
+posts.forEach((post) => container.innerHTML += getElContainer(post))
 
 function getElContainer(post){
     const {id, content, media, author, likes, created} = post;
@@ -86,7 +86,7 @@ function getElContainer(post){
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="${id}">
+                        <a class="like-button  js-like-button ${isPostLiked(id) ? 'like-button--liked' : ''}" href="#">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
@@ -106,35 +106,27 @@ function isPostLiked(id){
 }
 
 //3. bottone like
-const btnLikes = document.querySelectorAll('.like-button');
-const likesAdd = document.querySelectorAll('.js-like-counter');
+const likeButtons = document.querySelectorAll('.js-like-button');
+const likeAddCount = document.querySelectorAll('.js-likes-counter');
 
-
-btnLikes.forEach((btn, index) =>{
+likeButtons.forEach((btn, index) => {
     btn._id = posts[index].id;
     btn._index = index;
-    btn.addEventListener('click', liked)
-console.log(btn.id);
-
+    btn.addEventListener('click', likedBtn)
 })
 
-function liked (event){
- event.preventDefault();
- this.classList.toggle('like-button--liked');
+function likedBtn(event){
+    event.preventDefault();
+    this.classList.toggle('like-button--liked');
 
- //find per trovare nei posts il cliccato
- const selectPost = posts.find( post => post.id === this._id);
+    const postSelect = posts.find( post => post.id === this._id);
+    if(userLikes.includes(this._id)){
+        userLikes = userLikes.filter( likeId => likeId !==  this._id);
+        postSelect.likes--;
+    } else {
+        postSelect.likes++;
+        userLikes.push(this._id);
+    }
 
- //condizione per aumentare i like nel contatore
- if(userLikes.includes(this._id)){
-    userLikes = userLikes.filter( likeId => likeId !==  this._id);
-    selectPost.likes--;
- } else {
-    selectPost.likes++;
-    userLikes.push(this._id);
+    likeAddCount[this._index].innerText = postSelect.likes;
 }
- 
- likesAdd[this._index].innerHTML= selectPost.likes;
-}
-
-
