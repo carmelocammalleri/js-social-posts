@@ -59,6 +59,7 @@ const posts = [
 
 //2. collegare dall'html i vari punti
 const container = document.getElementById('container');
+let userLikes=  [];
 
 //3. stampare sull'html gli elementi
 posts.forEach((post)=> container.innerHTML += getElContainer(post))
@@ -91,7 +92,7 @@ function getElContainer(post){
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter" class="js-likes-counter">${likes}</b> persone
+                        Piace a <b id="like-counter-1" class="js-likes-counter">${likes}</b> persone
                     </div>
                 </div> 
             </div>            
@@ -100,25 +101,40 @@ function getElContainer(post){
     
 }
 
+function isPostLiked(id){ 
+    return userLikes.includes(id);
+}
+
 //3. bottone like
 const btnLikes = document.querySelectorAll('.like-button');
-const likesAdd = document.getElementById('like-counter');
+const likesAdd = document.querySelectorAll('.js-like-counter');
 
 
-btnLikes.forEach((btn, index)=>{
-    btn._id= posts[index].id;
-    btn.index= index;
+btnLikes.forEach((btn, index) =>{
+    btn._id = posts[index].id;
+    btn._index = index;
     btn.addEventListener('click', liked)
+console.log(btn.id);
+
 })
 
-    let counter= 0;
+function liked (event){
+ event.preventDefault();
+ this.classList.toggle('like-button--liked');
 
-    function liked (event){
-        event.preventDefault();
-        this.classList.add('like-button--liked');
-        
-        //find per trovare nei posts il cliccato
-        const postSel = posts.find( post => post.id === this._id);
-    }
+ //find per trovare nei posts il cliccato
+ const selectPost = posts.find( post => post.id === this._id);
+
+ //condizione per aumentare i like nel contatore
+ if(userLikes.includes(this._id)){
+    userLikes = userLikes.filter( likeId => likeId !==  this._id);
+    selectPost.likes--;
+ } else {
+    selectPost.likes++;
+    userLikes.push(this._id);
+}
+ 
+ likesAdd[this._index].innerHTML= selectPost.likes;
+}
 
 
