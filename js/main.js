@@ -91,7 +91,7 @@ function getElContainer(post){
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${likes}</b> persone
+                        Piace a <b id="like-counter" class="js-likes-counter">${likes}</b> persone
                     </div>
                 </div> 
             </div>            
@@ -102,11 +102,15 @@ function getElContainer(post){
 
 //3. bottone like
 const btnLikes = document.querySelectorAll('.like-button');
-const likesAdd = document.getElementById('like-counter-1');
+const likesAdd = document.getElementById('like-counter');
 
 
-btnLikes.forEach((like)=>{
-    like.addEventListener('click', liked)
+btnLikes.forEach((btn, index)=>{
+    btn._id= posts[index].id;
+    btn.index= index;
+    btn.addEventListener('click', liked)
+})
+
     let counter= 0;
 
     function liked (){
@@ -120,6 +124,5 @@ btnLikes.forEach((like)=>{
             counter = 0;
         }
     }
-})
 
 
