@@ -113,16 +113,12 @@ btnLikes.forEach((btn, index)=>{
 
     let counter= 0;
 
-    function liked (){
-        like.classList.add('like-button--liked');
-        counter++;
+    function liked (event){
+        event.preventDefault();
+        this.classList.add('like-button--liked');
         
-        console.log(counter);
-        
-        if (counter == 2){
-            like.classList.remove('like-button--liked');
-            counter = 0;
-        }
+        //find per trovare nei posts il cliccato
+        const postSel = posts.find( post => post.id === this._id);
     }
 
 
